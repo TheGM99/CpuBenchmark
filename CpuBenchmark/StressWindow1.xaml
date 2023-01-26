@@ -1,0 +1,23 @@
+﻿<Window x:Name="StressWindow" x:Class="CpuBenchmark.StressWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CpuBenchmark"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="CPU Benchmark" Height="450" Width="800" ContentRendered="stressWindow_ContentRendered" KeyDown="stressWindow_KeyDown">
+    <Grid>
+        <Label x:Name="titleLabel" Content="Stress Test" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold"/>
+        <Label x:Name="promptLabel" Content="press escape to finish." HorizontalAlignment="Center" Margin="0,379,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+        <lvc:CartesianChart x:Name="caretesianChart" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="58,109,52,108" >
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="%"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="No. Measurements"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+    </Grid>
+</Window>

@@ -1,0 +1,44 @@
+﻿<Window x:Name="MainWindow1" x:Class="CpuBenchmark.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CpuBenchmark"
+        mc:Ignorable="d"
+        Title="CPU Benchmark" Height="595" Width="800" ResizeMode="NoResize" ContentRendered="Window_Loaded">
+    <Grid>
+        <Rectangle x:Name="specRectangle" Margin="10,384,10,6" Stroke="#FF706868" Fill="#FFDCCFCF"/>
+        <Rectangle x:Name="specLabelRect" Height="44" Margin="10,331,10,0" Stroke="#FF21719E" VerticalAlignment="Top" Fill="#FF4894EE"/>
+        <Label x:Name="specLabel" Content="System Specifications" Height="44" Margin="10,331,434,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Foreground="#FFEEEEEE"/>
+        <Label x:Name="titleLabel" Content="Your Time:" Height="58" Margin="299,55,266,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold"/>
+        <Button x:Name="compareButton" Content="Compare your results" Margin="546,265,10,0" VerticalAlignment="Top" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" IsEnabled="False">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <ProgressBar x:Name="progBar" Height="34" Margin="216,150,216,0" VerticalAlignment="Top" IsIndeterminate="True"/>
+        <Label x:Name="errorLabel" Content="if something wrong msg here" Margin="216,181,216,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Label x:Name="osLabel" Content="Operating system:" HorizontalAlignment="Left" Margin="25,438,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="osText" Content="Operating system here" HorizontalAlignment="Left" Margin="168,438,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="cpuLabel" Content="CPU:" HorizontalAlignment="Left" Margin="25,469,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="cpuText" Content="Cpu here" HorizontalAlignment="Left" Margin="73,469,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="memLabel" Content="Memory (RAM):" HorizontalAlignment="Left" Margin="25,496,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="memText" Content="Memory here" HorizontalAlignment="Left" Margin="151,496,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="pcLabel" Content="PC Name:" HorizontalAlignment="Left" Margin="25,407,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="pcText" Content="Pc name here" HorizontalAlignment="Left" Margin="104,407,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="scoreTextSingle" Content="0000" HorizontalAlignment="Center" Margin="0,118,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Visibility="Collapsed"/>
+        <Label x:Name="scoreTextAll" Content="0000" HorizontalAlignment="Center" Margin="0,176,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Visibility="Collapsed"/>
+        <Label x:Name="scoreLabelSingle" Content="Single Thread:" HorizontalAlignment="Left" Margin="85,127,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Collapsed"/>
+        <Label x:Name="scoreLabelAll" Content="Multiple Threads:" HorizontalAlignment="Left" Margin="85,184,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Collapsed"/>
+        <Button x:Name="runButton" Content="Run Again" Margin="11,0,623,0" VerticalAlignment="Center" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" IsEnabled="False" Click="RunAgain">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+</Window>

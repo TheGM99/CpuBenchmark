@@ -1,0 +1,6 @@
+{
+  "MongoSettings": {
+    "ConnectionString": "mongodb+srv://Matczak:benchmarkCPU@cpubenchmarkcluster.8uibn6d.mongodb.net/?retryWrites=true&w=majority",
+    "DatabaseName": "CpuBenchmarkDB"
+  }
+}
