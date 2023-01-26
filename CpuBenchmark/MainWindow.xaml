@@ -11,7 +11,7 @@
         <Rectangle x:Name="specLabelRect" Height="44" Margin="10,331,10,0" Stroke="#FF21719E" VerticalAlignment="Top" Fill="#FF4894EE"/>
         <Label x:Name="specLabel" Content="System Specifications" Height="44" Margin="10,331,434,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Foreground="#FFEEEEEE"/>
         <Label x:Name="titleLabel" Content="Your Time:" Height="58" Margin="299,55,266,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold"/>
-        <Button x:Name="compareButton" Content="Compare your results" Margin="546,265,10,0" VerticalAlignment="Top" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" IsEnabled="False">
+        <Button x:Name="compareButton" Content="Compare your results" Margin="546,265,10,0" VerticalAlignment="Top" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" IsEnabled="False" Click="compareButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>

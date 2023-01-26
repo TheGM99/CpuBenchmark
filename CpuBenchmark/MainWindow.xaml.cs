@@ -166,5 +166,12 @@ namespace CpuBenchmark
                 compareButton.IsEnabled = true;
             }
         }
+
+        private void compareButton_Click(object sender, RoutedEventArgs e)
+        {
+            var resultWindow = new ResultWindow();
+            resultWindow.Show();
+            this.Close();
+        }
     }
 }
