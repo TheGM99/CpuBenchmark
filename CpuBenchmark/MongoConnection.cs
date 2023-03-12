@@ -1,109 +1,163 @@
 ﻿using CpuBenchmark.Models;
 using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+using System.Text.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using RestSharp;
+using System;
+using System.Text.Json.Serialization;
 
 namespace CpuBenchmark
 {
     internal class MongoConnection
     {
-        MongoClientSettings settings = MongoClientSettings.FromConnectionString("mongodb+srv://Matczak:benchmarkCPU@cpucluster.b276pfj.mongodb.net/?retryWrites=true&w=majority");
-        MongoClient dbClient;
+        RestClient post = new RestClient("https://eu-central-1.aws.data.mongodb-api.com/app/data-tlnvl/endpoint/data/v1/action/insertOne");
+        RestClient get = new RestClient("https://eu-central-1.aws.data.mongodb-api.com/app/data-tlnvl/endpoint/data/v1/action/find");
+        string apiKey = "YjuqZpIrjlsZryLeKbOtRAgIQ1KnfcMhHkI43woMf33V8ZEyZxWLWjv6cFSGc1I1";
+
+
+
         public MongoConnection()
         {
-            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-            dbClient = new MongoClient(settings);
-        }
-        
-        
-
-        public void AddEntry(Entry entry)
-        {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Entries");
-            var doc = new BsonDocument
-            {
-                {"entryId", entry.entryId },
-                {"performDate", entry.performDate },
-                {"timeScoreSingle", entry.timeScoreSingle },
-                {"timeScoreMulti", entry.timeScoreMulti },
-                {"machineId", entry.machineId }
-            };
-            collection.InsertOne(doc);
         }
 
-        public List<BsonDocument> GetEntriesByMachine(int machineId)
-        {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Entries");
 
-            var filter = Builders<BsonDocument>.Filter.Eq("machineId", machineId);
-            var sort = Builders<BsonDocument>.Sort.Ascending("performDate");
-            var entryDocument = collection.Find(filter).Sort(sort).ToList();
-            return entryDocument;
+
+        public async void AddEntry(Models.Entry entry)
+        {
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
+
+            string json = JsonSerializer.Serialize(entry);
+
+            string body = $@"{{
+                         ""collection"":""Entries"",
+                         ""database"":""CpuBenchmarkDB"", 
+                         ""dataSource"":""CpuCluster"", 
+                         ""document"": {json}
+                         }}";
+
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = await post.PostAsync(request);
         }
 
-        public List<BsonDocument> GetEntries()
+        public EntryDoc GetEntriesByMachine(int machineId)
         {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Entries");
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
 
-            var sort = Builders<BsonDocument>.Sort.Ascending("performDate");
-            var entryDocument = collection.Find(new BsonDocument()).Sort(sort).ToList();
-            return entryDocument;
+            string body = $@"{{
+                        ""collection"":""Entries"",
+                        ""database"":""CpuBenchmarkDB"",
+                        ""dataSource"":""CpuCluster"",
+                        ""filter"":{{ ""machineId"": {machineId} }},
+                        ""sort"":{{ ""performDate"": 1 }}
+                        }}";
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = get.Post(request);
+            return JsonSerializer.Deserialize<EntryDoc>(response.Content) ?? new EntryDoc();
+
+        }
+
+        public EntryDoc GetEntries()
+        {
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
+
+            string body = $@"{{
+                       ""collection"":""Entries"",
+                       ""database"":""CpuBenchmarkDB"",
+                       ""dataSource"":""CpuCluster"",
+                       ""sort"":{{ ""performDate"": 1 }} 
+                       }}";
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = get.Post(request);
+            return JsonSerializer.Deserialize<EntryDoc>(response.Content) ?? new EntryDoc();
         }
 
         public int GetLastEntryId()
         {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Entries");
-            var sort = Builders<BsonDocument>.Sort.Descending("entryId");
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
 
-            var entryDoc = collection.Find(new BsonDocument()).Sort(sort).FirstOrDefault();
-            if (entryDoc == null) return 0;
-            return Convert.ToInt32(entryDoc.GetElement("entryId").Value);
+            string body = $@"{{
+                       ""collection"":""Entries"",
+                       ""database"":""CpuBenchmarkDB"",
+                       ""dataSource"":""CpuCluster"",
+                       ""sort"":{{""performDate"": -1 }},
+                       ""limit"": 1
+                       }}";
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = get.Post(request);
+            return JsonSerializer.Deserialize<EntryDoc>(response.Content).entries[0].entryId;
         }
 
-        public void AddMachine(Models.Machine machine)
+        public async void AddMachine(Models.Machine machine)
         {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Machines");
-            var doc = new BsonDocument
-            {
-                {"machineId", machine.machineId },
-                {"machineName", machine.machineName },
-                {"operatingSystem", machine.operatingSystem },
-                {"CPU", machine.CPU },
-                {"memSize", machine.memSize }
-            };
-            collection.InsertOne(doc);
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
+
+            string json = JsonSerializer.Serialize(machine);
+
+            string body = $@"{{
+                       ""collection"":""Machines"",
+                       ""database"":""CpuBenchmarkDB"",
+                       ""dataSource"":""CpuCluster"",
+                       ""document"":{json}
+                       }}";
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = await post.PostAsync(request);
         }
 
-        public BsonDocument GetMachine(string name)
+        public Machine GetMachine(string name)
         {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Machines");
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
 
-            var filter = Builders<BsonDocument>.Filter.Eq("machineName", name);
-            var sort = Builders<BsonDocument>.Sort.Ascending("performDate");
-            var machineDocument = collection.Find(filter).Sort(sort).FirstOrDefault();
-            return machineDocument;
+            string body = "{\"collection\":\"Machines\",\"database\":\"CpuBenchmarkDB\",\"dataSource\":\"CpuCluster\",\"filter\":{\"machineName\":\"DESKTOP-6CG1DB9\"}}";
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = get.Post(request);
+            var test = JsonSerializer.Deserialize<MachineDoc>(response.Content);
+            return JsonSerializer.Deserialize<MachineDoc>(response.Content).machines[0] ?? new Machine();
+
+          
+            
         }
         public int GetLastMachineId()
         {
-            var database = dbClient.GetDatabase("CpuBenchmarkDB");
-            var collection = database.GetCollection<BsonDocument>("Machines");
-            var sort = Builders<BsonDocument>.Sort.Descending("machineId");
+            RestRequest request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Access-Control-Request-Headers", "*");
+            request.AddHeader("api-key", apiKey);
 
-            var machDoc = collection.Find(new BsonDocument()).Sort(sort).FirstOrDefault();
-            if (machDoc == null) return 0;
-            return Convert.ToInt32(machDoc.GetElement("machineId").Value);
+            string body = $@"{{
+                        ""collection"":""Machines"",
+                        ""database"":""CpuBenchmarkDB"",
+                        ""dataSource"":""CpuCluster"",
+                        ""sort"":{{""performDate"": -1 }},
+                        ""limit"": 1
+                        }}";
+
+            request.AddStringBody(body, DataFormat.Json);
+            RestResponse response = get.Post(request);
+            return JsonSerializer.Deserialize<MachineDoc>(response.Content).machines[0].machineId;
         }
     }
 }

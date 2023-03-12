@@ -812,6 +812,19 @@
           }
         }
       },
+      "RestSharp/108.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "runtime.linux-arm.runtime.native.System.IO.Ports/4.7.0": {
         "type": "package",
         "runtimeTargets": {
@@ -2209,6 +2222,24 @@
         "openhardwaremonitor.core.nuspec"
       ]
     },
+    "RestSharp/108.0.3": {
+      "sha512": "phq1AkVhqVXHZxvWDV4fJEJKCR5OHNFUGx2Ix8o5EFShS6654oZhth4X2RWvaU/W7UexIswW0T+lTirxfLU2Ow==",
+      "type": "package",
+      "path": "restsharp/108.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net5.0/RestSharp.dll",
+        "lib/net5.0/RestSharp.xml",
+        "lib/net6.0/RestSharp.dll",
+        "lib/net6.0/RestSharp.xml",
+        "lib/netstandard2.0/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.xml",
+        "restsharp.108.0.3.nupkg.sha512",
+        "restsharp.nuspec",
+        "restsharp.png"
+      ]
+    },
     "runtime.linux-arm.runtime.native.System.IO.Ports/4.7.0": {
       "sha512": "pCaX07mRrO11GfUb+whjn2AJgCofx26slw0sI3XC9v0pEZO8101iK6q4ymZOiI2M4a9sQxLr2LawAEDvF4RNXg==",
       "type": "package",
@@ -2871,6 +2902,7 @@
       "Microsoft.Extensions.Hosting >= 7.0.0",
       "MongoDB.Driver >= 2.18.0",
       "OpenHardwareMonitor.Core >= 0.8.0.5",
+      "RestSharp >= 108.0.3",
       "System.Management >= 7.0.0"
     ]
   },
@@ -2932,6 +2964,10 @@
           "OpenHardwareMonitor.Core": {
             "target": "Package",
             "version": "[0.8.0.5, )"
+          },
+          "RestSharp": {
+            "target": "Package",
+            "version": "[108.0.3, )"
           },
           "System.Management": {
             "target": "Package",

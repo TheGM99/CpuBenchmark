@@ -2,18 +2,8 @@
 using LiveCharts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MongoDB.Bson;
+using CpuBenchmark.Models;
 
 namespace CpuBenchmark
 {
@@ -27,20 +17,20 @@ namespace CpuBenchmark
         ChartValues<int> tempOne = new ChartValues<int>();
         ChartValues<int> tempAll = new ChartValues<int>();
         MongoConnection mc = new MongoConnection();
-        BsonDocument recentEntry;
+        Entry recentEntry;
         public ResultWindow()
         {
             InitializeComponent();
 
             var machine = mc.GetMachine(Environment.MachineName);
-            var Entries = mc.GetEntriesByMachine(Convert.ToInt32(machine.GetElement("machineId").Value));
-            recentEntry = Entries[Entries.Count - 1];
+            var doc = mc.GetEntriesByMachine(Convert.ToInt32(machine.machineId));
+            recentEntry = doc.entries[doc.entries.Count - 1];
             compare();
-            foreach (var entry in Entries)
+            foreach (var entry in doc.entries)
             {
-                tempOne.Add(Convert.ToInt32(entry.GetElement("timeScoreSingle").Value));
-                tempAll.Add(Convert.ToInt32(entry.GetElement("timeScoreMulti").Value));
-                dates.Add(entry.GetElement("performDate").Value.ToString());
+                tempOne.Add(Convert.ToInt32(entry.timeScoreSingle));
+                tempAll.Add(Convert.ToInt32(entry.timeScoreMulti));
+                dates.Add(entry.performDate.ToString());
             }
             caretesianChart.AxisY.Clear();
 
@@ -78,12 +68,12 @@ namespace CpuBenchmark
         {
             var allEntries = mc.GetEntries();
             double betterThan = 0;
-            foreach (var entry in allEntries)
+            foreach (var entry in allEntries.entries)
             {
-                if (Convert.ToInt32(entry.GetElement("timeScoreSingle").Value) > Convert.ToInt32(recentEntry.GetElement("timeScoreSingle").Value)) betterThan++;
-                else if (Convert.ToInt32(entry.GetElement("timeScoreMulti").Value) > Convert.ToInt32(recentEntry.GetElement("timeScoreMulti").Value)) betterThan++;
+                if (Convert.ToInt32(entry.timeScoreSingle) > Convert.ToInt32(recentEntry.timeScoreSingle)) betterThan++;
+                else if (Convert.ToInt32(entry.timeScoreMulti) > Convert.ToInt32(recentEntry.timeScoreMulti)) betterThan++;
             }
-            betterThan = Math.Round(betterThan/allEntries.Count * 100);
+            betterThan = Math.Round(betterThan/allEntries.entries.Count * 100);
             comparisonLabel.Content = "You did better than " + betterThan + "% of all entries !";
         }
     }

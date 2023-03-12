@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TMjkj/LTr/YsaKKwQxrhJzmYs3/Fee2s0cUSNGpWzUjh2Db92ECSbEm42oBLhST7BJtZEIBTie9Ztc/TFQYM1w==",
+  "dgSpecHash": "ZoHPPXE/VH7vpdO50LIsVcYJSelMfRj2RGRE1JBqP4G7W6beRaFTMsvtyPw1BNdYyjulhf+Lz4kwwZQpCCUujA==",
   "success": true,
   "projectFilePath": "C:\\Users\\grzes\\Documents\\GitHub\\CpuBenchmark\\CpuBenchmark\\CpuBenchmark.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\grzes\\.nuget\\packages\\mongodb.driver.core\\2.18.0\\mongodb.driver.core.2.18.0.nupkg.sha512",
     "C:\\Users\\grzes\\.nuget\\packages\\mongodb.libmongocrypt\\1.6.0\\mongodb.libmongocrypt.1.6.0.nupkg.sha512",
     "C:\\Users\\grzes\\.nuget\\packages\\openhardwaremonitor.core\\0.8.0.5\\openhardwaremonitor.core.0.8.0.5.nupkg.sha512",
+    "C:\\Users\\grzes\\.nuget\\packages\\restsharp\\108.0.3\\restsharp.108.0.3.nupkg.sha512",
     "C:\\Users\\grzes\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\4.7.0\\runtime.linux-arm.runtime.native.system.io.ports.4.7.0.nupkg.sha512",
     "C:\\Users\\grzes\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\4.7.0\\runtime.linux-arm64.runtime.native.system.io.ports.4.7.0.nupkg.sha512",
     "C:\\Users\\grzes\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\4.7.0\\runtime.linux-x64.runtime.native.system.io.ports.4.7.0.nupkg.sha512",

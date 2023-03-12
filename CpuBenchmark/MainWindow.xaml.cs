@@ -45,7 +45,7 @@ namespace CpuBenchmark
                 temp.memSize = MEM;
                 mc.AddMachine(temp);
             }
-            else machId = Convert.ToInt32(machine.GetElement("machineId").Value);
+            else machId = Convert.ToInt32(machine.machineId);
             await Task.Run(() => RunTests(11));
 
             Thinking(false);

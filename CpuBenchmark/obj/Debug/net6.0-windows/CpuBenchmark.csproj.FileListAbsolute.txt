@@ -86,3 +86,4 @@ C:\Users\grzes\Documents\GitHub\CpuBenchmark\CpuBenchmark\bin\Debug\net6.0-windo
 C:\Users\grzes\Documents\GitHub\CpuBenchmark\CpuBenchmark\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll
 C:\Users\grzes\Documents\GitHub\CpuBenchmark\CpuBenchmark\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\grzes\Documents\GitHub\CpuBenchmark\CpuBenchmark\bin\Debug\net6.0-windows\MongoDB.Driver.dll
+C:\Users\grzes\Documents\GitHub\CpuBenchmark\CpuBenchmark\bin\Debug\net6.0-windows\RestSharp.dll
