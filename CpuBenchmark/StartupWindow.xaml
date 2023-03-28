@@ -7,35 +7,39 @@
         mc:Ignorable="d"
         Title="CPU Benchmark" Height="450" Width="800">
     <Grid>
-        <Label Content="CPU Benchmark" HorizontalAlignment="Center" Margin="0,47,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold"/>
-        <Button x:Name="TestButton" Content="RUN" HorizontalAlignment="Center" Margin="0,145,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="TestButton_Click">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="TestButton" Content="RUN" HorizontalAlignment="Left" Margin="54,145,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="TestButton_Click" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="7"></Setter>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="resultsButton" Content="RESULTS" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="resultsButton_Click">
+        <Button x:Name="resultsButton" Content="RESULTS" HorizontalAlignment="Left" Margin="54,269,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="resultsButton_Click" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="stressButton" Content="STRESS TEST" HorizontalAlignment="Center" Margin="0,207,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="stressButton_Click">
+        <Button x:Name="stressButton" Content="STRESS TEST" HorizontalAlignment="Left" Margin="54,207,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="stressButton_Click" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="exitButton" Content="EXIT" HorizontalAlignment="Center" Margin="0,333,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="exitButton_Click">
+        <Button x:Name="exitButton" Content="EXIT" HorizontalAlignment="Left" Margin="54,333,0,0" VerticalAlignment="Top" Width="212" Height="50" FontSize="22" BorderBrush="#FF3A75D4" Background="#FF4894EE" FontWeight="Bold" Foreground="White" BorderThickness="3,3,3,3" Click="exitButton_Click" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
+        <Image x:Name="Logo" Grid.Column="1" HorizontalAlignment="Left" Height="130" Margin="45,10,0,0" VerticalAlignment="Top" Width="258" Source="/FannMark.png"/>
 
     </Grid>
 </Window>

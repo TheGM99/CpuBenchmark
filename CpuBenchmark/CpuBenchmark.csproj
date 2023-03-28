@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="FannMark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf.Core" Version="0.9.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
@@ -16,6 +20,10 @@
     <PackageReference Include="OpenHardwareMonitor.Core" Version="0.8.0.5" />
     <PackageReference Include="RestSharp" Version="108.0.3" />
     <PackageReference Include="System.Management" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="FannMark.png" />
   </ItemGroup>
 
 </Project>
