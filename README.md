@@ -1,5 +1,5 @@
 # CpuBenchmark
-CPU Benchmark made in .NET Core and WPF
+CPU Benchmark made in .NET Core and WPF using Fannkuch-Redux algorithm to test the computing power of the tested computer.
 
 How to run:
 
